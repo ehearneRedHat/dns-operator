@@ -2,6 +2,7 @@ name: Build and Publish Images
 
 on:
   push:
+    
 
 env:
   IMG_TAGS: ${{ github.sha }} ${{ github.ref_name }}
