@@ -2,14 +2,14 @@ name: Build and Publish Images
 
 on:
   push:
-    
+
 
 env:
   IMG_TAGS: ${{ github.sha }} ${{ github.ref_name }}
   IMG_REGISTRY_HOST: quay.io
-  IMG_REGISTRY_ORG: kuadrant
+  IMG_REGISTRY_ORG: rh-ee-ehearne
   IMG_REGISTRY_REPO: dns-operator
-  MAIN_BRANCH_NAME: main
+  MAIN_BRANCH_NAME: version-commit-hash-test
   OPERATOR_NAME: dns-operator
 
 jobs:
@@ -52,7 +52,7 @@ jobs:
         run: echo "Image = ${{ steps.build-image.outputs.image }}, Tags = ${{ steps.build-image.outputs.tags }}"
 
       - name: Push Image
-        if: github.repository_owner == 'kuadrant'
+        if: github.repository_owner == 'ehearneRedHat'
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
         with:
@@ -101,7 +101,7 @@ jobs:
         run: echo "Image = ${{ steps.build-image.outputs.image }}, Tags = ${{ steps.build-image.outputs.tags }}"
 
       - name: Push Image
-        if: github.repository_owner == 'kuadrant'
+        if: github.repository_owner == 'ehearneRedHat'
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
         with:
@@ -145,7 +145,7 @@ jobs:
         run: echo "Image = ${{ steps.build-image.outputs.image }}, Tags = ${{ steps.build-image.outputs.tags }}"
 
       - name: Push Image
-        if: github.repository_owner == 'kuadrant'
+        if: github.repository_owner == 'ehearneRedHat'
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
         with:
