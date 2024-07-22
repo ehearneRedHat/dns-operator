@@ -209,13 +209,13 @@ local-deploy-namespaced: docker-build kind-load-image ## Deploy the dns operator
 
 .PHONY: build
 build: COMMIT=$(shell git rev-parse HEAD || echo "unknown") 
-build: DIRTY=$(shell /hack/check-git-dirty.sh || echo "unknown")
+build: DIRTY=$(shell hack/check-git-dirty.sh || echo "unknown")
 build: manifests generate fmt vet ## Build manager binary.
 	go build -ldflags "-X main.commit=${COMMIT} -X main.dirty=${DIRTY}" -o bin/manager cmd/main.go
 
 .PHONY: run
 run: COMMIT=$(shell git rev-parse HEAD || echo "unknown") 
-run: DIRTY=$(shell /hack/check-git-dirty.sh || echo "unknown")
+run: DIRTY=$(shell hack/check-git-dirty.sh || echo "unknown")
 run: manifests generate fmt vet ## Run a controller from your host.
 	go run -ldflags "-X main.commit=${COMMIT} -X main.dirty=${DIRTY}" ./cmd/main.go --zap-devel --provider inmemory,aws,google
 
@@ -224,7 +224,7 @@ run: manifests generate fmt vet ## Run a controller from your host.
 # More info: https://docs.docker.com/develop/develop-images/build_enhancements/
 .PHONY: docker-build
 docker-build: COMMIT=$(shell git rev-parse HEAD || echo "unknown") 
-docker-build: DIRTY=$(shell /hack/check-git-dirty.sh || echo "unknown")
+docker-build: DIRTY=$(shell hack/check-git-dirty.sh || echo "unknown")
 docker-build: ## Build docker image with the manager.
 	$(CONTAINER_TOOL) build -t ${IMG} . --build-arg COMMIT=$(COMMIT) --build-arg DIRTY=$(DIRTY)
 
