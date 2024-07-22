@@ -48,7 +48,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           build-args: |
             COMMIT=${{ github.sha }}
-            DIRTY=${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') && github.ref != github.sha }}
+            DIRTY="false"
+
           dockerfiles: |
             ./Dockerfile
 
@@ -97,7 +98,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           build-args: |
             COMMIT=${{ github.sha }}
-            DIRTY=${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') && github.ref != github.sha }}
+            DIRTY="false"
           dockerfiles: |
             ./bundle.Dockerfile
 
