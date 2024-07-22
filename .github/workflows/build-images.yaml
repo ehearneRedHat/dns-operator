@@ -43,7 +43,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           build-args: |
             COMMIT=${{ github.sha }}
-            DIRTY="false"
+            DIRTY=false
 
           dockerfiles: |
             ./Dockerfile
@@ -93,7 +93,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           build-args: |
             COMMIT=${{ github.sha }}
-            DIRTY="false"
+            DIRTY=false
           dockerfiles: |
             ./bundle.Dockerfile
 
