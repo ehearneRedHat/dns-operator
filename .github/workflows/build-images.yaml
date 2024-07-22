@@ -47,7 +47,6 @@ jobs:
           tags: ${{ env.IMG_TAGS }}
           platforms: linux/amd64,linux/arm64
           build-args: |
-            DNS_OPERATOR_VERSION=${{ github.ref_name }}
             COMMIT=${{ github.sha }}
             DIRTY=${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') && github.ref != github.sha }}
           dockerfiles: |
@@ -97,7 +96,6 @@ jobs:
           tags: ${{ needs.build.outputs.build-tags }}
           platforms: linux/amd64,linux/arm64
           build-args: |
-            DNS_OPERATOR_VERSION=${{ github.ref_name }}
             COMMIT=${{ github.sha }}
             DIRTY=${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') && github.ref != github.sha }}
           dockerfiles: |
