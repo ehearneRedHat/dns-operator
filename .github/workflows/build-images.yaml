@@ -77,7 +77,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run make bundle
-        run: make bundle IMG=${{ needs.build.outputs.build-image }}
+        run: make bundle IMG=${{ steps.build.outputs.build-image }}
 
       - name: Install qemu dependency
         run: |
@@ -89,7 +89,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: ${{ env.OPERATOR_NAME }}-bundle
-          tags: ${{ needs.build.outputs.build-tags }}
+          tags: ${{ steps.build.outputs.build-tags }}
           platforms: linux/amd64,linux/arm64
           build-args: |
             COMMIT=${{ github.sha }}
@@ -123,7 +123,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run make catalog-build
-        run: make catalog-build BUNDLE_IMG=${{ needs.build-bundle.outputs.bundle-image }}
+        run: make catalog-build BUNDLE_IMG=${{ steps.build-bundle.outputs.bundle-image }}
 
       - name: Install qemu dependency
         run: |
@@ -135,7 +135,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: ${{ env.OPERATOR_NAME }}-catalog
-          tags: ${{ needs.build.outputs.build-tags }}
+          tags: ${{ steps.build.outputs.build-tags }}
           platforms: linux/amd64,linux/arm64
           context: ./tmp/catalog
           dockerfiles: |
